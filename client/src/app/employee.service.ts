@@ -37,5 +37,15 @@ export class EmployeeService {
     });
   }
 
+  updateEmployee(id: string, employee: Employee) {
+    return this.httpClient.put(`${this.url}/employees/${id}`,
+    employee, {responseType: 'text'});
+  }
+
+  deleteEmployee(id: string) {
+    return this.httpClient.delete(`${this.url}/employees/${id}`, {
+      responseType: 'text'
+    });
+  }
   
 }
