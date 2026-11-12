@@ -1,0 +1,56 @@
+# ==========================================
+# 1. Dependency Directories
+# ==========================================
+# Exclude heavy package folders for both backend (Node) and frontend (Angular)
+node_modules/
+dist/
+/public/lib/
+.angular/
+.c9/
+
+# ==========================================
+# 2. Environment Variables & Secrets
+# ==========================================
+# NEVER commit database credentials, API keys, or JWT secrets
+.env
+.env.local
+.env.production
+.env.development
+server/.env
+config/config.js
+config/jwt.secret
+
+# ==========================================
+# 3. Local Development & Databases
+# ==========================================
+# If running a local MongoDB instance inside the project folder
+data/db/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+mongodb.conf
+
+# ==========================================
+# 4. Testing & Coverage
+# ==========================================
+# Exclude test reports and coverage folders
+/coverage/
+.nyc_output/
+*.lcov
+
+# ==========================================
+# 5. Editor and System Files
+# ==========================================
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDEs and Text Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
