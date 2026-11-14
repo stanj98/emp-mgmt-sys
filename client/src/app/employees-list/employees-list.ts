@@ -73,13 +73,20 @@ export class EmployeesListComponent implements OnInit {
     'col-action',
   ];
 
-  ngOnInit(): {
-      this.fetchEmployees();
+  constructor(private employeesService: EmployeeService){}
+
+  ngOnInit() {
+    this.fetchEmployees();
   }
 
   deleteEmployee(id: string): void {
-    this.employesService.deleteEmployee(id).subscribe({
-      
-    })
+    this.employeesService.deleteEmployee(id).subscribe({
+      next: () => this.fetchEmployees(),
+    });
+  }
+
+  private fetchEmployees(): void {
+    this.employees$ = this.employeesService.employees$;
+    this.employeesService.getEmployees();
   }
 }
