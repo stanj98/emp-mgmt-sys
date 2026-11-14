@@ -59,5 +59,27 @@ import { MatCardModule } from "@angular/material/card";
         <button mat-raised-button color="primary" [routerLink]="['new']">
           Add a New Employee
         </button>
+      </mat-card-actions>
+    </mat-card>
   `
-});
+})
+
+export class EmployeesListComponent implements OnInit {
+  employees$ = {} as WritableSignal<Employee[]>;
+  displayedColumns: string[] = [
+    'col-name',
+    'col-position',
+    'col-level',
+    'col-action',
+  ];
+
+  ngOnInit(): {
+      this.fetchEmployees();
+  }
+
+  deleteEmployee(id: string): void {
+    this.employesService.deleteEmployee(id).subscribe({
+      
+    })
+  }
+}
