@@ -17,6 +17,24 @@ import { Employee } from "../employee";
     MatButtonModule,
   ],
   styles: `
-    .employee-form
-  `
+    .employee-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+    .mat-mdc-radio-button .mat-mdc-radio-button {
+      margin-left: 16px;
+    }
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+  `,
+
+  template:
+    <form
+      class="employee-form"
+      autocomplete="off"
+      [formGroup] = "employeeForm"
+      
 })
