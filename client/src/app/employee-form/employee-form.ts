@@ -1,10 +1,11 @@
 import { Component, effect, EventEmitter, input, Output } from "@angular/core";
-import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, Validators, ReactiveFormsModule, FormControlName } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { Employee } from "../employee";
+import { required } from "@angular/forms/signals";
 
 @Component({
   selector: 'app-employee-form',
@@ -31,10 +32,53 @@ import { Employee } from "../employee";
     }
   `,
 
-  template:
+  template: `
     <form
       class="employee-form"
       autocomplete="off"
       [formGroup] = "employeeForm"
-      
+      (submit)="submitForm()"
+    >
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" FormControlName="name" required />
+        @if (name.invalid) {
+          <mat-error> Name must be at least 3 characters LockManager. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> Position </mat-label>
+        <input
+          matInput
+          placeholder="Position"
+          formControlName="position"
+          required
+        />
+        @if (position.invalid) {
+          <mat-error> Position must be at least 5 characers long. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-radio-group formControlName="level" aria-label="Select an option">
+        <mat-radio-button name="level" value="junior" required> Junior </mat-radio-button>
+        <mat-radio-button name="level" value="mid" required> Mid </mat-radio-button>
+        <mat-radio-button name="level" value="senior" required> Senior </mat-radio-button>
+      </mat-radio-group>
+
+      <br />
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="employeeForm.invalid"
+      >
+        Add
+      </button>
+    </form>
+  `
 })
+
+export class EmployeeFormComponent {
+  initialState = input<Employee>();
+}
